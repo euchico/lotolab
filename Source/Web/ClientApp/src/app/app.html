@@ -1,0 +1,51 @@
+<header class="topbar">
+  <nav class="nav shell" [class.open]="isMenuOpen()" aria-label="Navegação principal">
+    <a class="brand" href="#inicio" aria-label="LotoLab, início" (click)="closeMenu()"><span class="brand-mark">L</span> LotoLab</a>
+    <div class="nav-links" id="nav-links"><a href="#funcoes" (click)="closeMenu()">Funções</a><a href="#metodo" (click)="closeMenu()">Método</a><a href="#evolucao" (click)="closeMenu()">Evolução</a></div>
+    <a class="nav-button" href="#funcoes">Conhecer a plataforma</a>
+    <button class="menu-button" type="button" [attr.aria-expanded]="isMenuOpen()" aria-controls="nav-links" (click)="toggleMenu()">Menu</button>
+  </nav>
+</header>
+
+<main id="inicio">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid shell">
+      <div>
+        <p class="eyebrow">Inteligência para dados de loteria</p>
+        <h1 id="hero-title">Dados para <strong>estudar.</strong><br />Não para prever.</h1>
+        <p class="hero-copy">Uma plataforma pública para consultar, analisar e compreender os resultados oficiais da Lotofácil com método, contexto e clareza estatística.</p>
+        <div class="hero-actions"><a class="button-primary" href="#funcoes">Explorar funções</a><a class="text-link" href="#metodo">Entenda a abordagem</a></div>
+        <p class="trust-line"><span aria-hidden="true">◈</span> Resultados e dados históricos provenientes de fontes oficiais. Toda leitura estatística é apresentada como análise descritiva.</p>
+      </div>
+      <div class="analysis-panel" aria-label="Exemplo ilustrativo de uma análise de concurso">
+        <div class="panel-top"><small>Lotofácil · concurso</small><span class="tag">Leitura ilustrativa</span></div>
+        <div class="panel-body">
+          <div class="draw-row" aria-label="Dezenas sorteadas">@for (number of drawNumbers; track number) {<span class="ball">{{ number }}</span>}</div>
+          <div class="metrics"><div class="metric"><span class="metric-label">Pares</span><strong>7</strong></div><div class="metric"><span class="metric-label">Ímpares</span><strong>8</strong></div><div class="metric"><span class="metric-label">Soma</span><strong>215</strong></div></div>
+          <p class="table-head">Distribuição por faixa</p>
+          <div class="chart" aria-hidden="true">@for (height of chartHeights; track $index) {<i class="bar" [class.hot]="$index === 1 || $index === 4 || $index === 8" [style.height.%]="height"></i>}</div>
+          <div class="chart-note"><span>Menor incidência</span><span>Maior incidência</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="data-strip" aria-label="Princípios do LotoLab"><div class="strip-grid shell"><div class="strip-intro">Uma ferramenta de consulta e aprendizagem construída a partir de dados — sem promessas de acerto.</div><div class="strip-item"><span>Modalidade inicial</span><strong>Lotofácil</strong></div><div class="strip-item"><span>Foco</span><strong>Análise histórica</strong></div><div class="strip-item"><span>Princípio</span><strong>Rigor e transparência</strong></div></div></aside>
+
+  <section id="funcoes" aria-labelledby="funcoes-title"><div class="shell"><p class="eyebrow">O que a plataforma permite</p><h2 class="section-title" id="funcoes-title">Uma base clara para explorar resultados e padrões históricos.</h2><p class="section-lead">O LotoLab evolui uma função por vez. A primeira modalidade de referência é a Lotofácil, com recursos orientados a consulta, aprendizado e análise.</p><div class="feature-grid">
+    <article class="feature"><span class="feature-num">01 — CONSULTA</span><h3>Histórico de concursos</h3><p>Navegue por concursos oficiais, datas, dezenas sorteadas e informações disponíveis para cada resultado.</p></article>
+    <article class="feature"><span class="feature-num">02 — LEITURA</span><h3>Detalhes do concurso</h3><p>Veja a composição de cada sorteio: pares, ímpares, soma, primos, sequências e repetição entre concursos.</p></article>
+    <article class="feature"><span class="feature-num">03 — ESTATÍSTICA</span><h3>Frequência e atraso</h3><p>Observe a incidência histórica das dezenas e quando apareceram pela última vez — como dados, não sinais do próximo resultado.</p></article>
+    <article class="feature"><span class="feature-num">04 — ANÁLISE</span><h3>Leitura de jogos</h3><p>Informe uma combinação e conheça suas características matemáticas e descritivas em uma grade simples de 01 a 25.</p></article>
+    <article class="feature"><span class="feature-num">05 — PROBABILIDADE</span><h3>Conceitos combinatórios</h3><p>Entenda espaço amostral, combinações e chances objetivas para transformar curiosidade em aprendizado.</p></article>
+    <article class="feature"><span class="feature-num">06 — GERAÇÃO</span><h3>Jogos aleatórios válidos</h3><p>Gere combinações válidas e, em etapas futuras, explore critérios de filtro sem atribuir poder preditivo a eles.</p></article>
+  </div></div></section>
+
+  <section class="method" id="metodo" aria-labelledby="metodo-title"><div class="method-layout shell"><div><p class="eyebrow">Método antes de opinião</p><h2 class="section-title" id="metodo-title">Toda análise começa com uma fonte confiável.</h2><p class="section-lead">A plataforma separa o que é resultado oficial, cálculo matemático e observação histórica. Isso torna as conclusões rastreáveis e evita leituras enganosas.</p><div class="statement"><p>Frequência não altera a chance matemática de uma combinação individual. Ela descreve o que já aconteceu.</p><cite>Princípio editorial do LotoLab</cite></div></div><div class="method-card"><header><strong>Ciclo de dados</strong><span class="tag">ETL</span></header><ol class="method-list"><li><span class="step">01</span><span><strong>Extrair</strong><br />Obter resultados em fontes oficiais da Caixa.</span></li><li><span class="step">02</span><span><strong>Transformar</strong><br />Converter a informação externa em dados consistentes.</span></li><li><span class="step">03</span><span><strong>Validar</strong><br />Conferir dezenas, datas, duplicidades e campos essenciais.</span></li><li><span class="step">04</span><span><strong>Consultar</strong><br />Apresentar os dados de forma compreensível na plataforma.</span></li></ol></div></div></section>
+
+  <section class="roadmap" id="evolucao" aria-labelledby="evolucao-title"><div class="shell"><p class="eyebrow">Construção incremental</p><h2 class="section-title" id="evolucao-title">Uma evolução deliberada, sem antecipar complexidade.</h2><p class="section-lead">A jornada começa na fundação técnica e segue até uma primeira modalidade completa. Cada etapa é pequena o bastante para aprender, validar e melhorar.</p><div class="roadmap-list"><article class="roadmap-item"><span class="phase">FUNDAÇÃO</span><h3>Base da aplicação</h3><p>API, interface web e uma comunicação simples para validar a estrutura.</p></article><article class="roadmap-item"><span class="phase">DADOS</span><h3>Histórico oficial</h3><p>Banco de dados, importação e validação dos concursos da Lotofácil.</p></article><article class="roadmap-item"><span class="phase">CONSULTA</span><h3>Resultados navegáveis</h3><p>Histórico, detalhes de concurso e atualização manual dos dados.</p></article><article class="roadmap-item"><span class="phase">ANÁLISE</span><h3>Estatística e combinatória</h3><p>Indicadores, probabilidades e ferramentas de estudo para a modalidade.</p></article></div></div></section>
+
+  <section class="cta" aria-labelledby="cta-title"><div class="cta-inner shell"><div><p class="eyebrow">LotoLab</p><h2 id="cta-title">Acompanhe uma plataforma que trata dados de loteria com seriedade.</h2></div><a class="button-primary" href="#inicio">Voltar ao início</a></div></section>
+</main>
+
+<footer><div class="footer-inner shell"><span>© 2026 LotoLab</span><span>Estudo, consulta e análise de dados oficiais.</span></div></footer>
