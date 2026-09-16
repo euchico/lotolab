@@ -2,7 +2,7 @@
   <nav class="nav shell" [class.open]="isMenuOpen()" aria-label="Navegação principal">
     <a class="brand" href="#inicio" aria-label="LotoLab, início" (click)="closeMenu()"><span class="brand-mark">L</span> LotoLab</a>    
     
-    <button class="button">Entrar</button>
+    <button class="nav-button login-button" type="button">Entrar</button>
   </nav>
 </header>
 
@@ -15,7 +15,7 @@
         <p class="hero-copy">Uma plataforma organizada para consultar, analisar e compreender os resultados oficiais das loterias brasileiras com método e clareza.</p>
         <div class="hero-actions">
           <a class="button-primary" href="#funcoes">Explorar Funções</a>
-          <a class="text-link" href="#apoio">Seu apoio</a>
+          <!--<a class="text-link" href="#suporte">Seu apoio</a>-->
         </div>
       </div>
       
@@ -26,9 +26,17 @@
 
         <div class="panel-body">
           <div class="draw-row" aria-label="Dezenas sorteadas">@for (number of drawNumbers; track number) {<span class="ball">{{ number }}</span>}</div>
-          <div class="metrics"><div class="metric"><span class="metric-label">Pares</span><strong>7</strong></div><div class="metric"><span class="metric-label">Ímpares</span><strong>8</strong></div><div class="metric"><span class="metric-label">Soma</span><strong>215</strong></div></div>
-          <p class="table-head">Distribuição por faixa</p>
-          <div class="chart" aria-hidden="true">@for (height of chartHeights; track $index) {<i class="bar" [class.hot]="$index === 1 || $index === 4 || $index === 8" [style.height.%]="height"></i>}</div>
+          <div class="metrics" aria-label="Métricas ilustrativas alternadas">
+            @for (metric of metricGroups[activeMetricGroup()]; track metric.label) {
+              <div class="metric metric--animated"><span class="metric-label">{{ metric.label }}</span><strong>{{ metric.value }}</strong></div>
+            }
+          </div>
+          <p class="table-head">Distribuição por dezena</p>
+          <div class="chart" role="img" aria-label="Distribuição ilustrativa dos quinze números sorteados">
+            @for (bar of chartBars; track bar.number) {
+              <div class="bar-column"><span class="bar-track"><i class="bar" [class.hot]="bar.height >= 70" [style.height.%]="bar.height" aria-hidden="true"></i></span><span class="bar-label">{{ bar.number }}</span></div>
+            }
+          </div>
           <div class="chart-note"><span>Menor incidência</span><span>Maior incidência</span></div>
         </div>
       </div>
@@ -40,7 +48,7 @@
       <div class="strip-intro">Resultados, análises e ferramentas para explorar as loterias brasileiras de forma organizada e contextualizada.</div>
       <div class="strip-item"><span>Fonte</span><strong>Resultados oficiais</strong></div>
       <div class="strip-item"><span>Princípio</span><strong>Rigor e transparência</strong></div>
-      <div class="strip-item"><span>Abordagem</span><strong>Contexto, Dados e Matemática</strong></div>
+      <div class="strip-item"><span>Abordagem</span><strong>Contexto e Matemática</strong></div>
     </div>
   </aside>
 
@@ -82,35 +90,27 @@
     </div>
   </section>
 
-  <section class="roadmap" id="evolucao" aria-labelledby="evolucao-title">
-    <div class="shell">
-      <p class="eyebrow">Construção incremental</p>
-      <h2 class="section-title" id="evolucao-title">Uma evolução deliberada, sem antecipar complexidade.</h2>
-      <p class="section-lead">A jornada começa na fundação técnica e segue até uma primeira modalidade completa. Cada etapa é pequena o bastante para aprender, validar e melhorar.</p>
-      <div class="roadmap-list">
-        <article class="roadmap-item">
-          <span class="phase">FUNDAÇÃO</span>
-          <h3>Base da aplicação</h3>
-          <p>API, interface web e uma comunicação simples para validar a estrutura.</p>
-        </article>
-        <article class="roadmap-item">
-          <span class="phase">DADOS</span>
-          <h3>Histórico oficial</h3>
-          <p>Banco de dados, importação e validação dos concursos da Lotofácil.</p>
-        </article>
-        <article class="roadmap-item">
-          <span class="phase">CONSULTA</span>
-          <h3>Resultados navegáveis</h3>
-          <p>Histórico, detalhes de concurso e atualização manual dos dados.</p>
-        </article>
-        <article class="roadmap-item">
-          <span class="phase">ANÁLISE</span>
-          <h3>Estatística e combinatória</h3>
-          <p>Indicadores, probabilidades e ferramentas de estudo para a modalidade.</p>
-        </article>
+  <!--
+  <section class="support" id="suporte" aria-labelledby="suporte-title">
+    <div class="support-layout shell">
+      <div class="support-options">
+        <p class="eyebrow">Apoio voluntário</p>
+        <div class="qr-placeholder" aria-label="Espaço reservado para o QR Code Pix">
+          <span>QR</span>
+          <small>QR Code Pix<br />em breve</small>
+        </div>
+        <a class="support-link" href="#suporte">Apoiar online <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="support-copy">
+        <p class="eyebrow">Mantenha o laboratório aberto</p>
+        <h2 class="section-title" id="suporte-title">Seu apoio ajuda o LotoLab a continuar sendo um espaço de estudo.</h2>
+        <p>O LotoLab é uma plataforma independente, sem fins lucrativos, criada para tornar a consulta e a compreensão de dados de loteria mais acessíveis.</p>
+        <p>Uma contribuição voluntária ajuda a manter a infraestrutura, aprimorar as ferramentas e ampliar o conteúdo educativo — sempre com transparência e sem promessas de previsão.</p>
       </div>
     </div>
   </section>
+  -->
 
   <section class="cta" aria-labelledby="cta-title">
     <div class="cta-inner shell">
@@ -118,9 +118,13 @@
         <p class="eyebrow">LotoLab</p>
         <h2 id="cta-title">Acompanhe uma plataforma que trata dados de loteria com seriedade.</h2>
       </div>
-      <a class="button-primary" href="#inicio">Voltar ao início</a>
     </div>
   </section>
 </main>
 
-<footer><div class="footer-inner shell"><span>© 2026 LotoLab</span><span>Estudo, consulta e análise de dados oficiais.</span></div></footer>
+<footer>
+  <div class="footer-inner shell">
+    <span>© 2026 LotoLab</span>
+    <span>Estudo, consulta e análise de dados oficiais.</span>
+  </div>
+</footer>
