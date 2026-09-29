@@ -1,0 +1,399 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LotoLab - Analisar Jogo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#526772",
+                        "on-primary-fixed": "#002204",
+                        "surface-variant": "#e5e2e1",
+                        "primary-container": "#2e7d32",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "outline-variant": "#bfcaba",
+                        "primary-fixed-dim": "#88d982",
+                        "on-secondary-fixed-variant": "#354a53",
+                        "tertiary-fixed": "#cee5ff",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#001d32",
+                        "on-tertiary-container": "#e9f2ff",
+                        "outline": "#707a6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#071e27",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "secondary-fixed-dim": "#b4cad6",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#cbffc2",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-tint": "#1b6d24",
+                        "secondary-container": "#cfe6f2",
+                        "tertiary-container": "#0073b2",
+                        "tertiary": "#005a8c",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary": "#0d631b",
+                        "secondary": "#4c616c",
+                        "surface-bright": "#fcf9f8",
+                        "primary-fixed": "#a3f69c",
+                        "secondary-fixed": "#cfe6f2",
+                        "on-surface-variant": "#40493d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c1c",
+                        "surface": "#fcf9f8",
+                        "on-primary-fixed-variant": "#005312",
+                        "surface-container": "#f0eded",
+                        "inverse-primary": "#88d982",
+                        "surface-dim": "#dcd9d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "margin-md": "32px",
+                        "margin-sm": "16px",
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "margin-lg": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "data-num": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-num": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .lottery-ball {
+            transition: all 0.2s ease;
+        }
+        .lottery-ball.selected {
+            background-color: theme('colors.primary');
+            color: theme('colors.on-primary');
+            border-color: theme('colors.primary');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full z-40 bg-surface w-64 border-r border-outline-variant">
+<div class="px-6 py-8">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">LotoLab</h1>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1 uppercase">Intelligence Platform</p>
+</div>
+<div class="flex-1 flex flex-col gap-1 pr-4">
+<!-- Tabs 0-2 (Inactive) -->
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+<span class="font-label-md text-label-md">Início</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">analytics</span>
+<span class="font-label-md text-label-md">Resultados</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">bar_chart</span>
+<span class="font-label-md text-label-md">Estatísticas</span>
+</a>
+<!-- Tab 3 (Active) -->
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer bg-secondary-container text-on-secondary-container rounded-r-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">troubleshoot</span>
+<span class="font-label-md text-label-md font-bold">Analisar jogo</span>
+</a>
+<!-- Tabs 4-6 (Inactive) -->
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">auto_awesome</span>
+<span class="font-label-md text-label-md">Gerador</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">calculate</span>
+<span class="font-label-md text-label-md">Probabilidades</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">construction</span>
+<span class="font-label-md text-label-md">Ferramentas</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-64 w-full h-screen overflow-hidden">
+<!-- TopNavBar (Header inside main content for structural ease, matching JSON shell intent) -->
+<header class="flex justify-between items-center w-full px-margin-md h-16 z-50 bg-surface border-b border-outline-variant shrink-0">
+<div class="flex items-center gap-4">
+<!-- Search could go here -->
+<div class="relative hidden sm:block text-on-surface-variant">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[20px]">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-full text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64 transition-all" placeholder="Buscar concurso..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-secondary hover:bg-surface-container-low transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-secondary hover:bg-surface-container-low transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden cursor-pointer">
+<!-- Placeholder avatar -->
+<svg class="w-full h-full text-on-surface-variant" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<main class="flex-1 overflow-y-auto p-margin-sm md:p-container-padding bg-surface-container-low">
+<div class="max-w-7xl mx-auto w-full space-y-gutter">
+<!-- Page Header -->
+<div class="mb-margin-md">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Analisar Jogo</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Simule e analise a viabilidade estatística da sua combinação.</p>
+</div>
+<!-- Main Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Number Selector -->
+<div class="lg:col-span-7 xl:col-span-8 flex flex-col gap-gutter">
+<!-- MatCard Equivalent -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Seletor de Dezenas</h3>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1 uppercase">Loto Fácil (01 - 25)</p>
+</div>
+<button class="px-4 py-2 bg-surface-container border border-outline-variant text-on-surface rounded-full font-label-md text-label-md hover:bg-surface-container-high transition-colors" id="clear-btn">
+                                    Limpar
+                                </button>
+</div>
+<!-- Grid 5x5 -->
+<div class="grid grid-cols-5 gap-3 md:gap-4 max-w-md mx-auto aspect-square" id="number-grid">
+<!-- Generated by JS for brevity and interactivity -->
+</div>
+</div>
+<!-- Secondary info card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding">
+<h4 class="font-label-md text-label-md text-on-surface-variant uppercase mb-4">Dica de Análise</h4>
+<p class="font-body-md text-body-md text-on-surface">Um jogo equilibrado estatisticamente tende a ter entre 7 e 8 números pares e ímpares, além de uma soma total em torno de 190 a 205. Evite sequências maiores que 5 dezenas consecutivas.</p>
+</div>
+</div>
+<!-- Right Column: Analytics Panel -->
+<div class="lg:col-span-5 xl:col-span-4">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding sticky top-container-padding">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-6 border-b border-outline-variant pb-4">Indicadores em Tempo Real</h3>
+<div class="space-y-4">
+<!-- Stat Item -->
+<div class="flex justify-between items-center py-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Dezenas Selecionadas</span>
+<div class="flex items-center gap-2">
+<span class="font-data-num text-data-num text-on-surface" id="stat-count">0</span>
+<span class="font-body-md text-body-md text-on-surface-variant">/ 15</span>
+</div>
+</div>
+<!-- Stat Item -->
+<div class="flex justify-between items-center py-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Pares / Ímpares</span>
+<div class="flex gap-2">
+<div class="bg-surface-container border border-outline-variant px-3 py-1 rounded-full flex items-center gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant">P:</span>
+<span class="font-data-num text-[14px] leading-tight text-on-surface" id="stat-even">0</span>
+</div>
+<div class="bg-surface-container border border-outline-variant px-3 py-1 rounded-full flex items-center gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant">I:</span>
+<span class="font-data-num text-[14px] leading-tight text-on-surface" id="stat-odd">0</span>
+</div>
+</div>
+</div>
+<!-- Stat Item -->
+<div class="flex justify-between items-center py-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Soma Total</span>
+<span class="font-data-num text-data-num text-on-surface" id="stat-sum">0</span>
+</div>
+<!-- Stat Item -->
+<div class="flex justify-between items-center py-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Números Primos</span>
+<span class="font-data-num text-data-num text-on-surface" id="stat-primes">0</span>
+</div>
+<div class="w-full h-px bg-outline-variant my-2"></div>
+<!-- Advanced Stats (Static Placeholders for UI logic) -->
+<div class="py-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase block mb-3">Distribuição por Linha</span>
+<div class="flex justify-between gap-1">
+<!-- Miniature bar chart simulation -->
+<div class="flex-1 bg-surface-container h-8 rounded-sm relative overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full bg-primary opacity-50 h-0 transition-all duration-300" id="dist-l1"></div>
+</div>
+<div class="flex-1 bg-surface-container h-8 rounded-sm relative overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full bg-primary opacity-50 h-0 transition-all duration-300" id="dist-l2"></div>
+</div>
+<div class="flex-1 bg-surface-container h-8 rounded-sm relative overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full bg-primary opacity-50 h-0 transition-all duration-300" id="dist-l3"></div>
+</div>
+<div class="flex-1 bg-surface-container h-8 rounded-sm relative overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full bg-primary opacity-50 h-0 transition-all duration-300" id="dist-l4"></div>
+</div>
+<div class="flex-1 bg-surface-container h-8 rounded-sm relative overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full bg-primary opacity-50 h-0 transition-all duration-300" id="dist-l5"></div>
+</div>
+</div>
+<div class="flex justify-between mt-1 text-[10px] font-label-md text-on-surface-variant">
+<span>L1</span><span>L2</span><span>L3</span><span>L4</span><span>L5</span>
+</div>
+</div>
+<div class="mt-6 pt-4">
+<button class="w-full bg-primary text-on-primary py-3 rounded-xl font-label-md text-label-md uppercase tracking-widest hover:bg-surface-tint transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled="" id="btn-analyze">
+                                        Gerar Relatório Completo
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Padding for bottom nav on mobile -->
+<div class="h-24 md:hidden"></div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full h-16 flex justify-around items-center bg-surface border-t border-outline-variant z-50 rounded-t-xl shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center gap-1 text-on-secondary-container w-16" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-label-md text-[10px]">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-on-secondary-container w-16" href="#">
+<span class="material-symbols-outlined text-[24px]">casino</span>
+<span class="font-label-md text-[10px]">Sorteios</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-primary font-bold w-16 active:bg-surface-container-highest rounded-lg py-1 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span class="font-label-md text-[10px]">Análise</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-on-secondary-container w-16" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="font-label-md text-[10px]">Perfil</span>
+</a>
+</nav>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridContainer = document.getElementById('number-grid');
+            const selectedNumbers = new Set();
+            const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23];
+
+            // UI Elements
+            const elCount = document.getElementById('stat-count');
+            const elEven = document.getElementById('stat-even');
+            const elOdd = document.getElementById('stat-odd');
+            const elSum = document.getElementById('stat-sum');
+            const elPrimes = document.getElementById('stat-primes');
+            const btnAnalyze = document.getElementById('btn-analyze');
+            const btnClear = document.getElementById('clear-btn');
+
+            // Generate Grid 1-25
+            for (let i = 1; i <= 25; i++) {
+                const numStr = i.toString().padStart(2, '0');
+                const ball = document.createElement('div');
+                ball.className = 'lottery-ball w-full h-full rounded-full border border-outline-variant flex items-center justify-center cursor-pointer bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:border-outline font-data-num text-data-num select-none';
+                ball.textContent = numStr;
+                ball.dataset.num = i;
+                
+                ball.addEventListener('click', () => toggleNumber(i, ball));
+                gridContainer.appendChild(ball);
+            }
+
+            function toggleNumber(num, el) {
+                if (selectedNumbers.has(num)) {
+                    selectedNumbers.delete(num);
+                    el.classList.remove('selected');
+                } else {
+                    if (selectedNumbers.size < 15) {
+                        selectedNumbers.add(num);
+                        el.classList.add('selected');
+                    } else {
+                        // Max 15 reached logic could go here (e.g. slight shake animation)
+                        return;
+                    }
+                }
+                updateStats();
+            }
+
+            function updateStats() {
+                let even = 0;
+                let odd = 0;
+                let sum = 0;
+                let primeCount = 0;
+                let lines = [0,0,0,0,0];
+
+                selectedNumbers.forEach(n => {
+                    if (n % 2 === 0) even++; else odd++;
+                    sum += n;
+                    if (primes.includes(n)) primeCount++;
+                    
+                    // Calculate line distribution (1-5, 6-10, etc.)
+                    const lineIndex = Math.ceil(n / 5) - 1;
+                    lines[lineIndex]++;
+                });
+
+                elCount.textContent = selectedNumbers.size;
+                elEven.textContent = even;
+                elOdd.textContent = odd;
+                elSum.textContent = sum;
+                elPrimes.textContent = primeCount;
+
+                // Update pseudo-charts
+                for(let i=0; i<5; i++) {
+                    const heightPercent = (lines[i] / 5) * 100;
+                    document.getElementById(`dist-l${i+1}`).style.height = `${heightPercent}%`;
+                }
+
+                if (selectedNumbers.size === 15) {
+                    btnAnalyze.disabled = false;
+                    elCount.classList.add('text-primary');
+                } else {
+                    btnAnalyze.disabled = true;
+                    elCount.classList.remove('text-primary');
+                }
+            }
+
+            btnClear.addEventListener('click', () => {
+                selectedNumbers.clear();
+                document.querySelectorAll('.lottery-ball').forEach(el => el.classList.remove('selected'));
+                updateStats();
+            });
+        });
+    </script>
+</body></html>

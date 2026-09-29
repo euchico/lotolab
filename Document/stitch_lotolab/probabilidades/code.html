@@ -1,0 +1,251 @@
+<!DOCTYPE html><html class="light" lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LotoLab - Probabilidades</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#526772",
+                        "on-primary-fixed": "#002204",
+                        "surface-variant": "#e5e2e1",
+                        "primary-container": "#2e7d32",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "outline-variant": "#bfcaba",
+                        "primary-fixed-dim": "#88d982",
+                        "on-secondary-fixed-variant": "#354a53",
+                        "tertiary-fixed": "#cee5ff",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#001d32",
+                        "on-tertiary-container": "#e9f2ff",
+                        "outline": "#707a6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#071e27",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "secondary-fixed-dim": "#b4cad6",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#cbffc2",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-tint": "#1b6d24",
+                        "secondary-container": "#cfe6f2",
+                        "tertiary-container": "#0073b2",
+                        "tertiary": "#005a8c",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary": "#0d631b",
+                        "secondary": "#4c616c",
+                        "surface-bright": "#fcf9f8",
+                        "primary-fixed": "#a3f69c",
+                        "secondary-fixed": "#cfe6f2",
+                        "on-surface-variant": "#40493d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c1c",
+                        "surface": "#fcf9f8",
+                        "on-primary-fixed-variant": "#005312",
+                        "surface-container": "#f0eded",
+                        "inverse-primary": "#88d982",
+                        "surface-dim": "#dcd9d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "margin-md": "32px",
+                        "margin-sm": "16px",
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "margin-lg": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "data-num": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-num": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full z-40 bg-surface border-r border-outline-variant w-64">
+<div class="px-6 py-8 flex flex-col gap-1">
+<span class="text-headline-md font-headline-md font-bold text-primary">LotoLab</span>
+<span class="text-label-md font-label-md text-on-surface-variant">Intelligence Platform</span>
+</div>
+<div class="flex-1 flex flex-col gap-2 py-4 pr-4">
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-md font-label-md">Início</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-label-md font-label-md">Resultados</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-label-md font-label-md">Estatísticas</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined">troubleshoot</span>
+<span class="text-label-md font-label-md">Analisar jogo</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-label-md font-label-md">Gerador</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer bg-secondary-container text-on-secondary-container rounded-r-full" href="#">
+<span class="material-symbols-outlined">calculate</span>
+<span class="text-label-md font-label-md">Probabilidades</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full" href="#">
+<span class="material-symbols-outlined">construction</span>
+<span class="text-label-md font-label-md">Ferramentas</span>
+</a>
+</div>
+</nav>
+<!-- TopNavBar (Mobile) -->
+<header class="md:hidden flex justify-between items-center w-full px-margin-sm h-16 z-50 bg-surface border-b border-outline-variant fixed top-0 left-0">
+<div class="text-title-lg font-title-lg font-bold text-primary">LotoLab</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-low transition-colors text-primary">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-low transition-colors text-primary">settings</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full pt-16 md:pt-0 md:ml-64 p-margin-sm md:p-margin-md pb-24 md:pb-margin-md max-w-[1200px] mx-auto">
+<div class="mb-margin-md">
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-background">Calculadora de Probabilidades</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">Analise as chances matemáticas reais dos seus jogos baseados em combinatória avançada.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Calculator Settings -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="bg-surface rounded-xl border border-outline-variant p-container-padding">
+<h2 class="text-title-lg font-title-lg text-on-surface mb-6">Parâmetros</h2>
+<div class="flex flex-col gap-4">
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Modalidade</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded p-3 text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+<option>Lotofácil</option>
+<option>Mega-Sena</option>
+<option>Quina</option>
+</select>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Números Jogados (Dezena)</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded p-3 text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+<option>15</option>
+<option>16</option>
+<option>17</option>
+<option>18</option>
+<option>19</option>
+<option>20</option>
+</select>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Alvo de Acertos</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded p-3 text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+<option>15 Acertos</option>
+<option>14 Acertos</option>
+<option>13 Acertos</option>
+<option>12 Acertos</option>
+<option>11 Acertos</option>
+</select>
+</div>
+<button class="mt-4 w-full bg-primary text-on-primary py-3 rounded text-label-md font-label-md hover:bg-surface-tint transition-colors">
+                            CALCULAR
+                        </button>
+</div>
+</div>
+</div>
+<!-- Result Display & Educational Content -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Huge Result Box -->
+<div class="bg-surface rounded-xl border border-outline-variant p-container-padding flex flex-col items-center justify-center text-center py-16">
+<span class="text-label-md font-label-md text-on-surface-variant mb-4 tracking-widest uppercase">A probabilidade exata é de</span>
+<div class="text-display-lg font-display-lg text-primary mb-2">1 em 3.268.760</div>
+<div class="text-body-md font-body-md text-secondary mt-4 max-w-md">
+                        Jogando 15 números para tentar 15 acertos na Lotofácil.
+                    </div>
+</div>
+<!-- Educational Info -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant p-container-padding">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">school</span>
+<div>
+<h3 class="text-title-lg font-title-lg text-on-surface mb-2">Como essa matemática funciona?</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-4 leading-relaxed">
+                                A probabilidade na loteria é baseada em <strong>Análise Combinatória</strong>. Para calcular suas chances reais, usamos a fórmula de combinação simples: <em>C(n, p) = n! / [p!(n - p)!]</em>, onde 'n' é o total de números disponíveis e 'p' é a quantidade de números sorteados.
+                            </p>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                                Ao jogar mais números (como 16 ou 17 na Lotofácil), você está efetivamente comprando múltiplas combinações de 15 números de uma só vez, o que reduz drasticamente a relação '1 em X', aumentando suas chances (e o preço do bilhete) exponencialmente.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full h-16 flex justify-around items-center bg-surface border-t border-outline-variant z-50">
+<a class="flex flex-col items-center justify-center gap-1 cursor-pointer text-on-secondary-container p-2 active:bg-surface-container-highest rounded-lg" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-md font-label-md text-[10px]">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 cursor-pointer text-on-secondary-container p-2 active:bg-surface-container-highest rounded-lg" href="#">
+<span class="material-symbols-outlined">casino</span>
+<span class="text-label-md font-label-md text-[10px]">Sorteios</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 cursor-pointer text-primary font-bold p-2 active:bg-surface-container-highest rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span class="text-label-md font-label-md text-[10px]">Análise</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 cursor-pointer text-on-secondary-container p-2 active:bg-surface-container-highest rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-md font-label-md text-[10px]">Perfil</span>
+</a>
+</nav>
+</body></html>

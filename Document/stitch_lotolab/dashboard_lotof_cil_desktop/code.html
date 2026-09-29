@@ -1,0 +1,466 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LotoLab - Dashboard Lotofácil</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#526772",
+                        "on-primary-fixed": "#002204",
+                        "surface-variant": "#e5e2e1",
+                        "primary-container": "#2e7d32",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "outline-variant": "#bfcaba",
+                        "primary-fixed-dim": "#88d982",
+                        "on-secondary-fixed-variant": "#354a53",
+                        "tertiary-fixed": "#cee5ff",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#001d32",
+                        "on-tertiary-container": "#e9f2ff",
+                        "outline": "#707a6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#071e27",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "secondary-fixed-dim": "#b4cad6",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#cbffc2",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-tint": "#1b6d24",
+                        "secondary-container": "#cfe6f2",
+                        "tertiary-container": "#0073b2",
+                        "tertiary": "#005a8c",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary": "#0d631b",
+                        "secondary": "#4c616c",
+                        "surface-bright": "#fcf9f8",
+                        "primary-fixed": "#a3f69c",
+                        "secondary-fixed": "#cfe6f2",
+                        "on-surface-variant": "#40493d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c1c",
+                        "surface": "#fcf9f8",
+                        "on-primary-fixed-variant": "#005312",
+                        "surface-container": "#f0eded",
+                        "inverse-primary": "#88d982",
+                        "surface-dim": "#dcd9d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "margin-md": "32px",
+                        "margin-sm": "16px",
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "margin-lg": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "data-num": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-num": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFA; }
+        .mat-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 4px; /* matching Tailwind rounded Default */
+        }
+        .lottery-ball {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #FFFFFF;
+            border: 1px solid #0d631b;
+            color: #0d631b;
+        }
+        .mat-table-container {
+            border: 1px solid #E0E0E0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #EEEEEE;
+        }
+        th {
+            background-color: #FFFFFF;
+            color: #526772;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .mat-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            height: 36px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .mat-flat-button-primary {
+            background-color: #0d631b;
+            color: #ffffff;
+        }
+        .mat-flat-button-primary:hover {
+            background-color: #0a4f15;
+        }
+        .mat-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 12px;
+            height: 32px;
+            border-radius: 16px;
+            background-color: #eae7e7;
+            color: #1b1c1c;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .mat-chip.active {
+            background-color: #cfe6f2;
+            color: #071e27;
+            border-color: #b4cad6;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full z-40 bg-surface border-r border-outline-variant w-64">
+<div class="px-6 py-4 flex items-center gap-3 border-b border-outline-variant">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold">L</div>
+<div>
+<div class="text-headline-md font-headline-md font-bold text-primary">LotoLab</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-wider font-semibold">Intelligence Platform</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<a class="bg-secondary-container text-on-secondary-container rounded-r-full flex items-center gap-4 px-6 py-3 cursor-pointer mr-4" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md">Início</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-all flex items-center gap-4 px-6 py-3 cursor-pointer mr-4 rounded-r-full mt-1" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Resultados</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-all flex items-center gap-4 px-6 py-3 cursor-pointer mr-4 rounded-r-full mt-1" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-md text-label-md">Estatísticas</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-all flex items-center gap-4 px-6 py-3 cursor-pointer mr-4 rounded-r-full mt-1" href="#">
+<span class="material-symbols-outlined">troubleshoot</span>
+<span class="font-label-md text-label-md">Analisar jogo</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-all flex items-center gap-4 px-6 py-3 cursor-pointer mr-4 rounded-r-full mt-1" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-md text-label-md">Gerador</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-all flex items-center gap-4 px-6 py-3 cursor-pointer mr-4 rounded-r-full mt-1" href="#">
+<span class="material-symbols-outlined">calculate</span>
+<span class="font-label-md text-label-md">Probabilidades</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-all flex items-center gap-4 px-6 py-3 cursor-pointer mr-4 rounded-r-full mt-1" href="#">
+<span class="material-symbols-outlined">construction</span>
+<span class="font-label-md text-label-md">Ferramentas</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-0 md:ml-64 flex flex-col min-w-0">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-margin-md h-16 z-50 bg-surface border-b border-outline-variant sticky top-0">
+<div class="flex items-center gap-4">
+<div class="text-title-lg font-title-lg font-bold text-primary md:hidden">LotoLab</div>
+<!-- Search could go here -->
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-low transition-colors flex items-center justify-center text-on-surface-variant cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-low transition-colors flex items-center justify-center text-on-surface-variant cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container overflow-hidden ml-2 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A small, professional avatar placeholder showing a generic user silhouette in minimalist greyscale, fitting for a corporate dashboard context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLUd3j0CrawurhUZPQDAwrDq061Q6HjBSYBryCEyXC0gULfrIlWtxrhcJweexVt0PIw1PhSFPBPYmp0L7j8mb-9eDLrnajk40Ao7nC1iX1za2EEGpC0ngs1ybfS61QDgGEYUUwOm5nhS2DOsQFq2EEP4lQRvTuWpLaXoSb4TYmvAKk1oxE7_qtKIk60-nrnU1nnocbisWPRuOvdpK44h2DJHNQpeoP84Ppttu3lR0048e71k7yxdRV">
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<main class="flex-1 p-margin-md max-w-7xl mx-auto w-full">
+<!-- Header & Modality Selector -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-margin-md gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Dashboard</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Visão geral analítica e últimos resultados.</p>
+</div>
+<div class="flex gap-2">
+<div class="mat-chip active font-body-md text-body-md">Lotofácil</div>
+<div class="mat-chip font-body-md text-body-md">Mega-Sena</div>
+<div class="mat-chip font-body-md text-body-md">Quina</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Último Concurso (Span 8 columns) -->
+<div class="md:col-span-8 mat-card p-container-padding flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h2 class="font-title-lg text-title-lg text-on-surface m-0">Concurso nº 3150</h2>
+<span class="bg-primary-container text-on-primary-fixed text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Acumulou</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant m-0">09/07/2024 • São Paulo, SP</p>
+</div>
+<button class="mat-button mat-flat-button-primary font-body-md text-body-md">
+                            Ver Detalhes
+                        </button>
+</div>
+<!-- Dezenas Sorteadas -->
+<div class="mb-6 flex-1 flex flex-col justify-center">
+<div class="text-label-md font-label-md uppercase text-on-surface-variant mb-4">Dezenas Sorteadas</div>
+<div class="flex flex-wrap gap-3">
+<div class="lottery-ball font-data-num text-data-num">01</div>
+<div class="lottery-ball font-data-num text-data-num">03</div>
+<div class="lottery-ball font-data-num text-data-num">04</div>
+<div class="lottery-ball font-data-num text-data-num">05</div>
+<div class="lottery-ball font-data-num text-data-num">07</div>
+<div class="lottery-ball font-data-num text-data-num">08</div>
+<div class="lottery-ball font-data-num text-data-num">10</div>
+<div class="lottery-ball font-data-num text-data-num">11</div>
+<div class="lottery-ball font-data-num text-data-num">13</div>
+<div class="lottery-ball font-data-num text-data-num">14</div>
+<div class="lottery-ball font-data-num text-data-num">16</div>
+<div class="lottery-ball font-data-num text-data-num">18</div>
+<div class="lottery-ball font-data-num text-data-num">21</div>
+<div class="lottery-ball font-data-num text-data-num">23</div>
+<div class="lottery-ball font-data-num text-data-num">25</div>
+</div>
+</div>
+<!-- Financial Summary -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-outline-variant">
+<div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase">Arrecadação</div>
+<div class="font-title-lg text-title-lg text-on-surface mt-1">R$ 25,4M</div>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase">Próximo Prêmio</div>
+<div class="font-title-lg text-title-lg text-primary mt-1 font-bold">R$ 4,5M</div>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase">Ganhadores (15)</div>
+<div class="font-title-lg text-title-lg text-on-surface mt-1">0</div>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase">Ganhadores (14)</div>
+<div class="font-title-lg text-title-lg text-on-surface mt-1">214</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-xs">R$ 1.845,20</div>
+</div>
+</div>
+</div>
+<!-- Resumo Estatístico (Span 4 columns) -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="mat-card p-container-padding flex-1">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-4">Resumo Estatístico</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center border-b border-surface-variant pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Pares / Ímpares</span>
+<span class="font-title-lg text-title-lg">7 / 8</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Soma das Dezenas</span>
+<span class="font-title-lg text-title-lg">189</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Repetidos do Anterior</span>
+<span class="font-title-lg text-title-lg text-primary">9</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Números Primos</span>
+<span class="font-title-lg text-title-lg">5</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Maior Sequência</span>
+<span class="font-title-lg text-title-lg">3</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Frequência das Dezenas (Full Width) -->
+<div class="md:col-span-12 mat-card p-container-padding">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-lg text-title-lg text-on-surface">Frequência das Dezenas</h3>
+<select class="form-select border-outline-variant rounded text-sm py-1 pl-2 pr-8 text-on-surface bg-white">
+<option>Últimos 10 concursos</option>
+<option selected="">Últimos 50 concursos</option>
+<option>Últimos 100 concursos</option>
+</select>
+</div>
+<div class="grid grid-cols-5 md:grid-cols-10 gap-4">
+<!-- Heatmap/Freq representation -->
+<!-- Row 1 -->
+<div class="flex flex-col items-center gap-1">
+<div class="text-xs font-bold text-on-surface">01</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"><div class="bg-primary h-full" style="width: 75%"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="text-xs font-bold text-on-surface">02</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"><div class="bg-primary h-full" style="width: 45%"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="text-xs font-bold text-on-surface">03</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"><div class="bg-primary h-full" style="width: 60%"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="text-xs font-bold text-on-surface">04</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"><div class="bg-primary h-full" style="width: 90%"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="text-xs font-bold text-on-surface">05</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"><div class="bg-primary h-full opacity-50" style="width: 30%"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="text-xs font-bold text-on-surface">06</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"><div class="bg-primary h-full" style="width: 55%"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="text-xs font-bold text-on-surface">07</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"><div class="bg-primary h-full" style="width: 80%"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="text-xs font-bold text-on-surface">08</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"><div class="bg-primary h-full" style="width: 65%"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="text-xs font-bold text-on-surface">09</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"><div class="bg-primary h-full opacity-50" style="width: 25%"></div></div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="text-xs font-bold text-on-surface">10</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"><div class="bg-primary h-full" style="width: 85%"></div></div>
+</div>
+</div>
+<div class="text-right mt-4">
+<a class="text-primary font-body-md text-body-md font-medium hover:underline" href="#">Ver grade completa</a>
+</div>
+</div>
+<!-- Histórico (Full Width) -->
+<div class="md:col-span-12 mat-card p-0 mt-2 mb-margin-lg">
+<div class="p-container-padding pb-4 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-title-lg text-title-lg text-on-surface m-0">Histórico Recente</h3>
+<button class="text-on-surface-variant flex items-center justify-center w-8 h-8 rounded hover:bg-surface-container-low transition">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<div class="mat-table-container border-0 rounded-none">
+<table>
+<thead>
+<tr>
+<th class="font-label-md text-label-md uppercase">Concurso</th>
+<th class="font-label-md text-label-md uppercase">Data</th>
+<th class="font-label-md text-label-md uppercase">Dezenas</th>
+<th class="font-label-md text-label-md uppercase">Ganhadores (15)</th>
+<th class="font-label-md text-label-md uppercase">Prêmio</th>
+<th class="font-label-md text-label-md uppercase text-center">Status</th>
+<th class="font-label-md text-label-md uppercase text-right">Ações</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="font-body-md text-body-md font-medium text-on-surface">3150</td>
+<td class="font-body-md text-body-md text-on-surface-variant">09/07/2024</td>
+<td class="font-body-md text-body-md text-on-surface">01 03 04 05 ... 25</td>
+<td class="font-body-md text-body-md text-on-surface-variant">0</td>
+<td class="font-body-md text-body-md text-on-surface-variant">R$ 0,00</td>
+<td class="text-center">
+<span class="bg-primary-container text-on-primary-fixed text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider inline-block">Acumulou</span>
+</td>
+<td class="text-right">
+<button class="text-on-surface-variant hover:text-primary transition"><span class="material-symbols-outlined text-sm">visibility</span></button>
+</td>
+</tr>
+<tr>
+<td class="font-body-md text-body-md font-medium text-on-surface">3149</td>
+<td class="font-body-md text-body-md text-on-surface-variant">08/07/2024</td>
+<td class="font-body-md text-body-md text-on-surface">02 05 06 08 ... 24</td>
+<td class="font-body-md text-body-md text-on-surface-variant">2</td>
+<td class="font-body-md text-body-md text-on-surface-variant">R$ 850.120,50</td>
+<td class="text-center">
+<span class="bg-surface-container-high text-on-surface-variant text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider inline-block">Saiu</span>
+</td>
+<td class="text-right">
+<button class="text-on-surface-variant hover:text-primary transition"><span class="material-symbols-outlined text-sm">visibility</span></button>
+</td>
+</tr>
+<tr>
+<td class="font-body-md text-body-md font-medium text-on-surface">3148</td>
+<td class="font-body-md text-body-md text-on-surface-variant">06/07/2024</td>
+<td class="font-body-md text-body-md text-on-surface">01 02 04 07 ... 23</td>
+<td class="font-body-md text-body-md text-on-surface-variant">1</td>
+<td class="font-body-md text-body-md text-on-surface-variant">R$ 1.700.540,25</td>
+<td class="text-center">
+<span class="bg-surface-container-high text-on-surface-variant text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider inline-block">Saiu</span>
+</td>
+<td class="text-right">
+<button class="text-on-surface-variant hover:text-primary transition"><span class="material-symbols-outlined text-sm">visibility</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

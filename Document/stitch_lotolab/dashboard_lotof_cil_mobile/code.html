@@ -1,0 +1,292 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LotoLab - Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#526772",
+                        "on-primary-fixed": "#002204",
+                        "surface-variant": "#e5e2e1",
+                        "primary-container": "#2e7d32",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "outline-variant": "#bfcaba",
+                        "primary-fixed-dim": "#88d982",
+                        "on-secondary-fixed-variant": "#354a53",
+                        "tertiary-fixed": "#cee5ff",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#001d32",
+                        "on-tertiary-container": "#e9f2ff",
+                        "outline": "#707a6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#071e27",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "secondary-fixed-dim": "#b4cad6",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#cbffc2",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-tint": "#1b6d24",
+                        "secondary-container": "#cfe6f2",
+                        "tertiary-container": "#0073b2",
+                        "tertiary": "#005a8c",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary": "#0d631b",
+                        "secondary": "#4c616c",
+                        "surface-bright": "#fcf9f8",
+                        "primary-fixed": "#a3f69c",
+                        "secondary-fixed": "#cfe6f2",
+                        "on-surface-variant": "#40493d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c1c",
+                        "surface": "#fcf9f8",
+                        "on-primary-fixed-variant": "#005312",
+                        "surface-container": "#f0eded",
+                        "inverse-primary": "#88d982",
+                        "surface-dim": "#dcd9d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "margin-md": "32px",
+                        "margin-sm": "16px",
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "margin-lg": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "data-num": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-num": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-margin-md h-16 z-50 bg-surface text-primary font-body-md border-b border-outline-variant docked full-width top-0">
+<div class="text-title-lg font-title-lg font-bold text-primary">LotoLab</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined cursor-pointer active:opacity-80">notifications</span>
+<span class="material-symbols-outlined cursor-pointer active:opacity-80">settings</span>
+</div>
+</header>
+<!-- SideNavBar (Hidden on Mobile, Included per instructions) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full z-40 bg-surface border-r border-outline-variant w-64 pt-16">
+<div class="px-6 py-8">
+<h2 class="text-headline-md font-headline-md font-bold text-primary">LotoLab</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Intelligence Platform</p>
+</div>
+<ul class="flex flex-col gap-2 px-2">
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer bg-secondary-container text-on-secondary-container rounded-r-full font-label-md text-label-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+                Início
+            </li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full font-label-md text-label-md">
+<span class="material-symbols-outlined">analytics</span>
+                Resultados
+            </li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full font-label-md text-label-md">
+<span class="material-symbols-outlined">bar_chart</span>
+                Estatísticas
+            </li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full font-label-md text-label-md">
+<span class="material-symbols-outlined">troubleshoot</span>
+                Analisar jogo
+            </li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full font-label-md text-label-md">
+<span class="material-symbols-outlined">auto_awesome</span>
+                Gerador
+            </li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full font-label-md text-label-md">
+<span class="material-symbols-outlined">calculate</span>
+                Probabilidades
+            </li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant hover:bg-surface-container-high transition-all rounded-r-full font-label-md text-label-md">
+<span class="material-symbols-outlined">construction</span>
+                Ferramentas
+            </li>
+</ul>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-full md:pl-64 flex flex-col pt-4 pb-24 px-margin-sm md:px-margin-lg gap-margin-sm">
+<!-- Header Section -->
+<div class="grid grid-cols-4 gap-gutter w-full">
+<div class="col-span-4">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">Dashboard</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Visão geral analítica da Lotofácil</p>
+</div>
+</div>
+<!-- Último Concurso Card (Prominent) -->
+<section class="w-full bg-surface border border-outline-variant rounded-lg p-container-padding flex flex-col gap-4 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+<div class="flex justify-between items-start border-b border-surface-container-highest pb-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-wider">Último Concurso</span>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-1">#3054</h2>
+<span class="font-body-md text-body-md text-on-surface-variant">15/03/2024</span>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded uppercase tracking-wide hover:bg-primary-container transition-colors">
+                    Detalhes
+                </button>
+</div>
+<div class="flex flex-col gap-2 pt-2">
+<span class="font-label-md text-label-md text-on-surface-variant">Dezenas Sorteadas</span>
+<div class="flex flex-wrap gap-2 justify-center py-2">
+<!-- Lottery Balls Custom Component -->
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">01</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">03</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">04</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">07</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">08</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">11</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">12</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">15</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">16</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">18</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">20</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">21</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">23</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">24</div>
+<div class="w-11 h-11 rounded-full border border-outline bg-surface flex items-center justify-center font-data-num text-data-num text-on-surface">25</div>
+</div>
+</div>
+</section>
+<!-- Statistical Summary (Horizontal Scroll on Mobile) -->
+<section class="w-full flex flex-col gap-3 mt-4">
+<h3 class="font-title-lg text-title-lg text-on-surface">Resumo Estatístico</h3>
+<div class="flex overflow-x-auto gap-4 snap-x pb-4 -mx-margin-sm px-margin-sm hide-scrollbar">
+<div class="min-w-[160px] flex-shrink-0 snap-center bg-surface rounded-lg p-4 border border-outline-variant flex flex-col gap-1">
+<div class="flex justify-between items-center w-full">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Soma</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">calculate</span>
+</div>
+<div class="font-headline-md text-headline-md text-primary mt-2">198</div>
+<div class="font-label-md text-label-md text-secondary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> Média Alta
+                    </div>
+</div>
+<div class="min-w-[160px] flex-shrink-0 snap-center bg-surface rounded-lg p-4 border border-outline-variant flex flex-col gap-1">
+<div class="flex justify-between items-center w-full">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Ímpares/Pares</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">pie_chart</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-2">8 / 7</div>
+<div class="font-label-md text-label-md text-secondary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Padrão Normal
+                    </div>
+</div>
+<div class="min-w-[160px] flex-shrink-0 snap-center bg-surface rounded-lg p-4 border border-outline-variant flex flex-col gap-1">
+<div class="flex justify-between items-center w-full">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Repetidas</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">history</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-2">9</div>
+<div class="font-label-md text-label-md text-secondary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span> Ref. Anterior
+                    </div>
+</div>
+</div>
+</section>
+<!-- Recent Results as Cards (Mobile friendly table alternative) -->
+<section class="w-full flex flex-col gap-4 mt-2">
+<div class="flex justify-between items-center">
+<h3 class="font-title-lg text-title-lg text-on-surface">Últimos Resultados</h3>
+<span class="font-label-md text-label-md text-primary cursor-pointer uppercase">Ver Todos</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="bg-surface border border-outline-variant rounded p-4 flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-title-lg text-title-lg text-on-surface">#3053</span>
+<span class="font-body-md text-body-md text-on-surface-variant">14/03/2024</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-md text-label-md text-on-surface-variant">Soma: 185</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Í/P: 9/6</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded p-4 flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-title-lg text-title-lg text-on-surface">#3052</span>
+<span class="font-body-md text-body-md text-on-surface-variant">13/03/2024</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-md text-label-md text-on-surface-variant">Soma: 201</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Í/P: 7/8</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Visible only on Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full h-16 flex justify-around items-center bg-surface border-t border-outline-variant z-50 rounded-t-xl pb-safe shadow-[0_-4px_16px_rgba(0,0,0,0.05)]">
+<div class="flex flex-col items-center justify-center gap-1 cursor-pointer w-full h-full active:bg-surface-container-highest">
+<span class="material-symbols-outlined text-primary font-bold" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md text-primary font-bold">Início</span>
+</div>
+<div class="flex flex-col items-center justify-center gap-1 cursor-pointer w-full h-full text-on-secondary-container active:bg-surface-container-highest">
+<span class="material-symbols-outlined">casino</span>
+<span class="font-label-md text-label-md">Sorteios</span>
+</div>
+<div class="flex flex-col items-center justify-center gap-1 cursor-pointer w-full h-full text-on-secondary-container active:bg-surface-container-highest">
+<span class="material-symbols-outlined">query_stats</span>
+<span class="font-label-md text-label-md">Análise</span>
+</div>
+<div class="flex flex-col items-center justify-center gap-1 cursor-pointer w-full h-full text-on-secondary-container active:bg-surface-container-highest">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Perfil</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html><html class="light" lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LotoLab - Gerador</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-container": "#526772",
+                        "on-primary-fixed": "#002204",
+                        "surface-variant": "#e5e2e1",
+                        "primary-container": "#2e7d32",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "outline-variant": "#bfcaba",
+                        "primary-fixed-dim": "#88d982",
+                        "on-secondary-fixed-variant": "#354a53",
+                        "tertiary-fixed": "#cee5ff",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#001d32",
+                        "on-tertiary-container": "#e9f2ff",
+                        "outline": "#707a6c",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#071e27",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "secondary-fixed-dim": "#b4cad6",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#cbffc2",
+                        "surface-container-low": "#f6f3f2",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-tint": "#1b6d24",
+                        "secondary-container": "#cfe6f2",
+                        "tertiary-container": "#0073b2",
+                        "tertiary": "#005a8c",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary": "#0d631b",
+                        "secondary": "#4c616c",
+                        "surface-bright": "#fcf9f8",
+                        "primary-fixed": "#a3f69c",
+                        "secondary-fixed": "#cfe6f2",
+                        "on-surface-variant": "#40493d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c1c",
+                        "surface": "#fcf9f8",
+                        "on-primary-fixed-variant": "#005312",
+                        "surface-container": "#f0eded",
+                        "inverse-primary": "#88d982",
+                        "surface-dim": "#dcd9d9"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "base": "8px",
+                        "margin-md": "32px",
+                        "margin-sm": "16px",
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "margin-lg": "48px"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "data-num": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-num": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .mat-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #0d631b;
+            cursor: pointer;
+            margin-top: -6px;
+        }
+        .mat-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #bfcaba;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex">
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full z-40 bg-surface dark:bg-surface-dim w-64 border-r border-outline-variant">
+<div class="px-6 py-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">science</span>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">LotoLab</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Intelligence Platform</p>
+</div>
+</div>
+<ul class="flex flex-col gap-2 mt-4 px-4 w-full">
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-on-secondary-fixed-variant transition-all rounded-r-full mr-4">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Início</span>
+</li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-on-secondary-fixed-variant transition-all rounded-r-full mr-4">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Resultados</span>
+</li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-on-secondary-fixed-variant transition-all rounded-r-full mr-4">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-md text-label-md">Estatísticas</span>
+</li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-on-secondary-fixed-variant transition-all rounded-r-full mr-4">
+<span class="material-symbols-outlined">troubleshoot</span>
+<span class="font-label-md text-label-md">Analisar jogo</span>
+</li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer bg-secondary-container dark:bg-secondary-fixed-variant text-on-secondary-container dark:text-on-secondary-fixed rounded-r-full transition-all mr-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-md text-label-md font-bold">Gerador</span>
+</li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-on-secondary-fixed-variant transition-all rounded-r-full mr-4">
+<span class="material-symbols-outlined">calculate</span>
+<span class="font-label-md text-label-md">Probabilidades</span>
+</li>
+<li class="flex items-center gap-4 px-6 py-3 cursor-pointer text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-on-secondary-fixed-variant transition-all rounded-r-full mr-4">
+<span class="material-symbols-outlined">construction</span>
+<span class="font-label-md text-label-md">Ferramentas</span>
+</li>
+</ul>
+</nav>
+<div class="flex-1 md:ml-64 min-h-screen flex flex-col">
+<header class="flex justify-between items-center w-full px-margin-md h-16 z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant md:hidden">
+<div class="text-title-lg font-title-lg font-bold text-primary dark:text-primary-fixed">LotoLab</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined cursor-pointer text-primary dark:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors rounded-full p-2">notifications</span>
+<span class="material-symbols-outlined cursor-pointer text-primary dark:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors rounded-full p-2">settings</span>
+</div>
+</header>
+<main class="flex-1 p-margin-sm md:p-margin-md pb-32 max-w-[1440px] mx-auto w-full">
+<div class="mb-8">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-2">Gerador Avançado</h2>
+<p class="font-body-md text-body-md text-secondary max-w-3xl">Configure os parâmetros matemáticos para a geração de combinações. O LotoLab utiliza algoritmos de filtragem baseados em análise de frequência e padrões estruturais.</p>
+</div>
+<div class="bg-surface-container-low border-l-4 border-secondary p-4 mb-margin-md flex gap-4 items-start rounded-r-lg">
+<span class="material-symbols-outlined text-secondary">info</span>
+<div class="font-body-md text-body-md text-on-surface-variant">
+<strong>Nota Analítica:</strong> Os filtros aplicados abaixo não alteram as probabilidades matemáticas fundamentais do sorteio. Eles servem exclusivamente para restringir o universo de combinações geradas às características estruturais definidas pelo usuário, reduzindo o custo de apostas múltiplas não direcionadas.
+                </div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<div class="lg:col-span-4 flex flex-col gap-margin-sm">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding">
+<h3 class="font-title-lg text-title-lg text-on-background mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">tune</span>
+                            Parâmetros Base
+                        </h3>
+<div class="flex flex-col gap-6">
+<div class="relative w-full">
+<label class="absolute -top-2 left-2 bg-surface-container-lowest px-1 font-label-md text-label-md text-secondary">Dezenas por Jogo</label>
+<select class="w-full border border-outline rounded p-3 bg-transparent text-on-surface focus:border-primary outline-none font-body-md text-body-md appearance-none">
+<option selected="" value="15">15 Dezenas</option>
+<option value="16">16 Dezenas</option>
+<option value="17">17 Dezenas</option>
+<option value="18">18 Dezenas</option>
+<option value="19">19 Dezenas</option>
+<option value="20">20 Dezenas</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-secondary pointer-events-none">arrow_drop_down</span>
+</div>
+<div class="relative w-full">
+<label class="absolute -top-2 left-2 bg-surface-container-lowest px-1 font-label-md text-label-md text-secondary">Números Fixos (Obrigatórios)</label>
+<input class="w-full border border-outline rounded p-3 bg-transparent text-on-surface focus:border-primary outline-none font-body-md text-body-md" placeholder="Ex: 01, 14, 22" type="text">
+</div>
+<div class="relative w-full">
+<label class="absolute -top-2 left-2 bg-surface-container-lowest px-1 font-label-md text-label-md text-secondary">Números Excluídos</label>
+<input class="w-full border border-outline rounded p-3 bg-transparent text-on-surface focus:border-primary outline-none font-body-md text-body-md" placeholder="Ex: 05, 11, 25" type="text">
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding">
+<h3 class="font-title-lg text-title-lg text-on-background mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">filter_alt</span>
+                            Filtros Estruturais
+                        </h3>
+<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface">Proporção Ímpares/Pares</label>
+<span class="font-label-md text-label-md text-primary">8 Ímp / 7 Par</span>
+</div>
+<input class="mat-slider appearance-none bg-transparent w-full" max="10" min="5" type="range" value="8">
+<div class="flex justify-between font-label-md text-label-md text-secondary mt-1">
+<span>Min: 5/10</span>
+<span>Max: 10/5</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface">Quantidade de Primos</label>
+<span class="font-label-md text-label-md text-primary">5 - 6</span>
+</div>
+<div class="flex items-center gap-4">
+<input class="w-full border border-outline rounded p-2 bg-transparent text-center focus:border-primary outline-none font-body-md text-body-md" max="9" min="2" type="number" value="5">
+<span class="text-secondary font-body-md text-body-md">até</span>
+<input class="w-full border border-outline rounded p-2 bg-transparent text-center focus:border-primary outline-none font-body-md text-body-md" max="9" min="2" type="number" value="6">
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface">Soma das Dezenas</label>
+</div>
+<div class="flex items-center gap-4">
+<input class="w-full border border-outline rounded p-2 bg-transparent text-center focus:border-primary outline-none font-body-md text-body-md" type="number" value="180">
+<span class="text-secondary font-body-md text-body-md">a</span>
+<input class="w-full border border-outline rounded p-2 bg-transparent text-center focus:border-primary outline-none font-body-md text-body-md" type="number" value="210">
+</div>
+</div>
+<label class="flex items-center gap-3 cursor-pointer mt-2">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox">
+<span class="font-body-md text-body-md text-on-surface">Permitir sequências de até 4 números</span>
+</label>
+</div>
+<button class="w-full mt-8 bg-primary hover:bg-surface-tint text-on-primary rounded-full py-3 px-6 font-label-md text-label-md flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined">memory</span>
+                            GERAR COMBINAÇÕES
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-8 flex flex-col gap-margin-sm">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding h-full flex flex-col">
+<div class="flex justify-between items-center mb-6 border-b border-surface-variant pb-4">
+<h3 class="font-title-lg text-title-lg text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">dataset</span>
+                                Resultados Gerados
+                            </h3>
+<div class="flex gap-2">
+<button class="border border-outline text-secondary hover:bg-surface-container-low rounded px-4 py-1 font-label-md text-label-md flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-sm">download</span> Exportar
+                                </button>
+<button class="border border-outline text-secondary hover:bg-surface-container-low rounded px-4 py-1 font-label-md text-label-md flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-sm">content_copy</span> Copiar
+                                </button>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-4 overflow-y-auto">
+<div class="p-4 border border-outline-variant rounded-lg hover:border-primary transition-colors bg-surface-bright flex flex-col xl:flex-row gap-4 items-start xl:items-center justify-between">
+<div class="flex flex-wrap gap-2 w-full xl:w-auto">
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">02</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">03</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">05</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">08</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">10</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">11</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">14</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">15</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">17</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">19</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">20</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">22</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">23</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">24</span>
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-outline-variant bg-surface-container-lowest text-primary font-data-num text-data-num">25</span>
+</div>
+<div class="flex gap-4 xl:border-l xl:border-outline-variant xl:pl-4">
+<div class="flex flex-col items-center">
+<span class="font-label-md text-label-md text-secondary uppercase">Soma</span>
+<span class="font-data-num text-data-num text-on-surface">218</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-md text-label-md text-secondary uppercase">Ím/Pa</span>
+<span class="font-data-num text-data-num text-on-surface">8/7</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-md text-label-md text-secondary uppercase">Primos</span>
+<span class="font-data-num text-data-num text-on-surface">6</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<nav class="md:hidden fixed bottom-0 w-full h-16 flex justify-around items-center bg-surface dark:bg-surface-dim z-50 docked full-width bottom-0 rounded-t-xl border-t border-outline-variant dark:border-on-surface-variant shadow-lg">
+<div class="flex flex-col items-center justify-center gap-1 cursor-pointer active:opacity-80 text-on-secondary-container dark:text-on-secondary-container hover:bg-surface-container-highest transition-colors w-full h-full">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Início</span>
+</div>
+<div class="flex flex-col items-center justify-center gap-1 cursor-pointer active:opacity-80 text-on-secondary-container dark:text-on-secondary-container hover:bg-surface-container-highest transition-colors w-full h-full">
+<span class="material-symbols-outlined">casino</span>
+<span class="font-label-md text-label-md">Sorteios</span>
+</div>
+<div class="flex flex-col items-center justify-center gap-1 cursor-pointer active:opacity-80 text-primary dark:text-primary-fixed-dim font-bold hover:bg-surface-container-highest transition-colors w-full h-full border-t-2 border-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span class="font-label-md text-label-md">Análise</span>
+</div>
+<div class="flex flex-col items-center justify-center gap-1 cursor-pointer active:opacity-80 text-on-secondary-container dark:text-on-secondary-container hover:bg-surface-container-highest transition-colors w-full h-full">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Perfil</span>
+</div>
+</nav>
+</body></html>
